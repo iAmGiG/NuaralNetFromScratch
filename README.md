@@ -9,4 +9,5 @@ find it here **[Sentdex playlist](https://www.youtube.com/playlist?list=PLQVvvaa
 >> * improve understanding of statistical models. 
 
 #### notes:
-* requirements numpy.
+* requirements numpy, matplotlib, SYS.
+* This version uses absl-py for any system arguments which requires OS. 
