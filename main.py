@@ -5,34 +5,39 @@ import matplotlib
 from absl import app
 
 
+def current_output(inputs, weights, biases):
+    layer_outputs = []
+
+    for neuron_weights, neuron_bias in zip(weights, biases):
+        neuron_output = 0
+        for n_input, weight in zip(inputs, neuron_weights):
+            neuron_output += n_input * weight
+        neuron_output += neuron_bias
+        layer_outputs.append(neuron_output)
+
+    return layer_outputs
+
+def quick_dot_prod(inputs, weights, bias):
+    output = np.dot(weights, inputs) + bias)
+	return output
+
 def main(argv):
     if len(argv) > 2:
         raise app.UsageError("Expected one command-line argument(s), "
                              f"got: {argv}")
 
     inputs = [1, 2, 3, 2.5]
-    weights0 = [0.2, 0.8, -0.5, 1.0]
-    weights1 = [0.5, -0.91, 0.26, -0.5]
-    weights2 = [-0.26, -0.27, .17, 0.87]
-    bias0 = 2
-    bias1 = 3
-    bias2 = 0.5
 
-    output = [(inputs[0] * weights0[0]) +
-              (inputs[1] * weights0[1]) +
-              (inputs[2] * weights0[2]) +
-              (inputs[3] * weights0[3]) + bias0,
-              (inputs[0] * weights1[0]) +
-              (inputs[1] * weights1[1]) +
-              (inputs[2] * weights1[2]) +
-              (inputs[3] * weights1[3]) + bias1,
-              (inputs[0] * weights2[0]) +
-              (inputs[1] * weights2[1]) +
-              (inputs[2] * weights2[2]) +
-              (inputs[3] * weights2[3]) + bias2
-              ]
+    weights = [[0.2, 0.8, -0.5, 1.0],
+               [0.5, -0.91, 0.26, -0.5],
+               [-0.26, -0.27, .17, 0.87]]
+    biases = [2, 3, 0.5]
 
-    print(output)
+	output = quick_dot_prod(inputs, weights, biases)
+
+    layer_outputs = current_output(inputs, weights, biases)
+
+    print(layer_outputs)
 
     os._exit(0)
 
