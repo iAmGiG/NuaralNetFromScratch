@@ -3,11 +3,7 @@ import os
 import numpy as np
 import matplotlib
 from absl import app
-from absl import flags
 
-flags.DEFINE_float("Random_seed", 0.0, "The seed given to np.random.seed, default is 0.0")
-
-FLAGS = flags.FLAGS
 
 def current_output(inputs, weights, biases):
     layer_outputs = []
@@ -25,28 +21,35 @@ def quick_dot_prod(inputs, weights, bias):
     output = np.dot(inputs, np.array(weights).T) + bias
 	return output
 
-class Layer_Dense:
-	def __inti__(self, n_input, n_neurons):
-		self.weights = 0.1 * np.random.randn(n_input, n_neurons)
-		self.biases = np.zeros((1, n_neurons))
-	def forward(self, inputs):
-		pass
-		
-
 def main(argv):
     if len(argv) > 2:
         raise app.UsageError("Expected one command-line argument(s), "
                              f"got: {argv}")
 
-    X = [[1, 2, 3, 2.5],
+    inputs = [[1, 2, 3, 2.5],
 				[2.0, 5.0, -1.0, 2.0],
 				[-1.5, 2.7, 3.3, -0.8]]
 
-    
+    weights0 = [[0.2, 0.8, -0.5, 1.0],
+               [0.5, -0.91, 0.26, -0.5],
+               [-0.26, -0.27, .17, 0.87]]
+			   
+    biases0 = [2, 3, 0.5]
+	
+	weights1 = [[0.1,-0.14,0.5],
+				[-0.5,0.12,-0.33],
+				[-0.44,0.73,-0.13]]
+	
+	biases1 = [-1,2,-0.5]-
+
+	layer_outputs0 = quick_dot_prod(inputs, weights0, biases0)
+
+    layer_outputs1 = quick_dot_prod(layer_outputs0, weights1, biases1)
+
+    print(layer_outputs)
 
     os._exit(0)
 
 
 if __name__ == '__main__':
-	np.random.seed(FLAGS.Random_seed)
     app.run(main)
