@@ -38,13 +38,18 @@ for neuron_weights, neuron_bias in zip(weights, biases):
     layer_outputs.append(neuron_output)
 
 print(layer_outputs)
-
+# %%
+# a, b = 0, 1
+# for i in range(2):
+#   print(a)
+#   a, b = b, a + b
 # %%
 import numpy as np
-# dot_product = 
-# %%
-a, b = 0, 1
-for i in range(2):
-  print(a)
-  a, b = b, a + b
+
+inputs = [1.0, 2.0, 3.0, 2.5]
+weights = [ 0.2, 0.8, -0.5, 1.0]
+bias = 2
+
+output = np.dot(weights, inputs) + bias
+print(output)
 # %%
